@@ -29,3 +29,6 @@ code {
   background-color: aqua;
   transition: ease-in-out .3s;
 }
+.selectedEnemy {
+  color: green;
+}

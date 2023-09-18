@@ -4,6 +4,7 @@ import PlayerStats from './components/PlayerStats'
 import './index.css';
 import EnemyList from './components/EnemyList';
 import AddEnemyForm from './components/AddEnemyForm';
+import Button from './components/Button';
 
 
 
@@ -68,12 +69,25 @@ function randomNumber(min, max) {
   
 
 export default function App() {
-  const [showAddEnemy, SetShowAddEnemy] = useState(false)
   const [enemies, setEnemies] = useState(initialEnemies)
+  const [showAddEnemy, SetShowAddEnemy] = useState(false)
+  const [selectedEnemy, setSelectedEnemy] = useState(null)
 
   function handleAddEnemy(enemy) {
   setEnemies(enemies => [...enemies, enemy])
+  handleShowAddEnemy()
   }
+
+  function handleShowAddEnemy() {
+    SetShowAddEnemy((show) => !show)
+  }
+  function handleSelectedEnemy(enemy) {
+    setSelectedEnemy(cur => 
+        cur?.id === enemy.id
+        ? null
+        : enemy
+        )
+}
   
   return (
     <div className="App">
@@ -83,7 +97,15 @@ export default function App() {
       showAddEnemy &&
       <AddEnemyForm onAddEnemy={handleAddEnemy}/>
       }
-      <EnemyList enemies={enemies} />
+
+      <Button onClick={handleShowAddEnemy}>
+        {showAddEnemy ? 'Close' : 'Add Enemy to list'}
+      </Button>
+      <EnemyList 
+      enemies={enemies} 
+      selectedEnemy={selectedEnemy}
+      onSelection={handleSelectedEnemy} 
+       />
     </div>
   );
 }

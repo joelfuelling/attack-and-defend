@@ -10,7 +10,7 @@ export default function AddEnemyForm({onAddEnemy}) {
     
     function handleSubmit(e) {
         e.preventDefault()
-        if(!name || !hp || !minimumAttack|| !maximumAttack  || !defense) return
+        if(!name || !hp || !minimumAttack || !maximumAttack  || !defense ) return
     }
 
     const id = crypto.randomUUID()
@@ -49,7 +49,7 @@ export default function AddEnemyForm({onAddEnemy}) {
             <input type="text" value={defense} onChange={e => setDefense(e.target.value)}/>
             <br />
             <br />
-            <Button onClick={() => onAddEnemy()}>Add Enemy</Button>
+            <Button className="button" handleAddEnemy={onAddEnemy}>Add Enemy!</Button>
         </form>
         }
         </>

@@ -1,20 +1,22 @@
+import { useState } from "react"
+import  Button  from "./Button"
 
-import { Button } from "@mui/material"
-export default function Enemy({enemies}) {
+export default function Enemy({enemy}) {
+    const [selectedEnemy, setSelectedEnemy] = useState(null)
+    
+
     return (
         <>
-        { enemies && enemies.map((enemy) =>
-        <div className='border'>
-            <h2> Enemy: {enemy.name} </h2>
-            <ul className='stats-list'>
-                <li>HP: {enemy.hp}</li>
-                <li>Attack: {enemy.minimumAttack} - {enemy.maximumAttack}</li>
-                <li>Defense: {enemy.defense}</li>
-                
-            </ul>
-        </div>
-        )
-      }
+        <li className='border'>
+            <div>
+            <h4>{enemy.name} </h4>
+            <Button>Battle!</Button>
+            </div>
+                <p>HP: {enemy.hp}</p>
+                <p>Attack: {enemy.minimumAttack} - {enemy.maximumAttack}</p>
+                <p>Defense: {enemy.defense}</p>
+                  
+        </li>
         </>
     )
 }

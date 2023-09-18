@@ -1,15 +1,14 @@
 
+import { useState } from 'react';
 import PlayerStats from './components/PlayerStats'
 import './index.css';
-import Enemy from './components/Enemy';
+import EnemyList from './components/EnemyList';
+import AddEnemyForm from './components/AddEnemyForm';
 
-function randomNumber(min, max) {
-  return Number(Math.floor((Math.random() * (max - min + 1)) + min));
-}
 
-// I need to assign a function to the attack property so that a new random number is generated each time the function is called
 
 const player1 = {
+    id: 1,
     name: 'Joel',
     hp: Number(20),
     minimumAttack: 3,
@@ -21,41 +20,70 @@ const player1 = {
     defense: 3
   }
 
-  const enemies = [
-    { name: 'Goblin',
-      hp: 12,
-      minimumAttack: 2,
-      maximumAttack: 4,
-      attack: function() {
-        return randomNumber(enemies.minimumAttack, enemies.maximumAttack)
-      },
-      defense: 1
+
+const initialEnemies = [
+  { id: 1,
+    name: 'Goblin',
+    hp: 12,
+    minimumAttack: 2,
+    maximumAttack: 4,
+    attack: function() {
+      return randomNumber(
+        initialEnemies.minimumAttack, 
+        initialEnemies.maximumAttack)
     },
-    { name: 'Gloop!',
-      hp: 8,
-      minimumAttack: 3,
-      maximumAttack: 4,
-      attack: function() {
-        return randomNumber(enemies.minimumAttack, enemies.maximumAttack)
-      },
-      defense: 3
+    defense: 1
+  },
+  { id: 2,
+    name: 'Gloop!',
+    hp: 8,
+    minimumAttack: 3,
+    maximumAttack: 4,
+    attack: function() {
+      return randomNumber(
+        initialEnemies.minimumAttack, 
+        initialEnemies.maximumAttack)
     },
-    { name: 'Smuggler',
-      hp: 10,
-      minimumAttack: 2,
-      maximumAttack: 6,
-      attack: function() {
-        return randomNumber(enemies.minimumAttack, enemies.maximumAttack)
-      },
-      defense: 4
-    }
-  ]
+    defense: 3
+  },
+  { id: 3,
+    name: 'Smuggler',
+    hp: 10,
+    minimumAttack: 2,
+    maximumAttack: 6,
+    attack: function() {
+      return randomNumber(
+        initialEnemies.minimumAttack, 
+        initialEnemies.maximumAttack)
+    },
+    defense: 4
+  }
+]
+
+
+function randomNumber(min, max) {
+  return Number(Math.floor((Math.random() * (max - min + 1)) + min));
+}
+
+  
 
 export default function App() {
+  const [showAddEnemy, SetShowAddEnemy] = useState(false)
+  const [enemies, setEnemies] = useState(initialEnemies)
+
+  function handleAddEnemy(enemy) {
+  setEnemies(enemies => [...enemies, enemy])
+  }
+  
   return (
     <div className="App">
       <PlayerStats player1={player1}/>
-      <Enemy enemies={enemies}/>
+      
+      {
+      showAddEnemy &&
+      <AddEnemyForm onAddEnemy={handleAddEnemy}/>
+      }
+      <EnemyList enemies={enemies} />
     </div>
   );
 }

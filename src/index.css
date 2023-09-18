@@ -17,9 +17,15 @@ code {
 }
 
 .stats-list {
+  
   display: flex;
   flex-direction: column;
   margin: 5px;
   padding: 3px;
   list-style: none;
+}
+
+.button:hover {
+  background-color: aqua;
+  transition: ease-in-out .3s;
 }

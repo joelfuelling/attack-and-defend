@@ -75,31 +75,33 @@ export default function App() {
 
   function handleAddEnemy(enemy) {
   setEnemies(enemies => [...enemies, enemy])
-  handleShowAddEnemy()
+  // handleShowAddEnemy()
   }
 
   function handleShowAddEnemy() {
     SetShowAddEnemy((show) => !show)
   }
+
   function handleSelectedEnemy(enemy) {
     setSelectedEnemy(cur => 
         cur?.id === enemy.id
         ? null
         : enemy
         )
+    SetShowAddEnemy(false)
 }
-  
+
   return (
     <div className="App">
       <PlayerStats player1={player1}/>
       
       {
       showAddEnemy &&
-      <AddEnemyForm onAddEnemy={handleAddEnemy}/>
+      <AddEnemyForm handleAddEnemy={handleAddEnemy}/>
       }
 
       <Button onClick={handleShowAddEnemy}>
-        {showAddEnemy ? 'Close' : 'Add Enemy to list'}
+        {showAddEnemy ? 'Close' : 'Add a new enemy to list '}
       </Button>
       <EnemyList 
       enemies={enemies} 

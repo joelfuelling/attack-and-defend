@@ -5,6 +5,7 @@ import './index.css';
 import EnemyList from './components/EnemyList';
 import AddEnemyForm from './components/AddEnemyForm';
 import Button from './components/Button';
+import SelectedEnemy from './components/SelectedEnemy';
 
 
 
@@ -69,17 +70,18 @@ function randomNumber(min, max) {
   
 
 export default function App() {
+  const [error, setError] = useState(null)
   const [enemies, setEnemies] = useState(initialEnemies)
-  const [showAddEnemy, SetShowAddEnemy] = useState(false)
+  const [showAddEnemy, setShowAddEnemy] = useState(false)
   const [selectedEnemy, setSelectedEnemy] = useState(null)
 
   function handleAddEnemy(enemy) {
   setEnemies(enemies => [...enemies, enemy])
-  // handleShowAddEnemy()
+  handleShowAddEnemy()
   }
 
   function handleShowAddEnemy() {
-    SetShowAddEnemy((show) => !show)
+    setShowAddEnemy((show) => !show)
   }
 
   function handleSelectedEnemy(enemy) {
@@ -88,16 +90,21 @@ export default function App() {
         ? null
         : enemy
         )
-    SetShowAddEnemy(false)
+    setShowAddEnemy(false)
 }
 
   return (
     <div className="App">
+      <div className="by2grid"> 
       <PlayerStats player1={player1}/>
-      
+      {selectedEnemy && 
+      <SelectedEnemy selectedEnemy={selectedEnemy} error={error} setError={setError}/>
+      }
+      </div>
       {
+      
       showAddEnemy &&
-      <AddEnemyForm handleAddEnemy={handleAddEnemy}/>
+      <AddEnemyForm onAddEnemy={handleAddEnemy}/>
       }
 
       <Button onClick={handleShowAddEnemy}>

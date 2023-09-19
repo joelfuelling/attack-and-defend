@@ -1,4 +1,5 @@
 body {
+  padding: 5%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -17,12 +18,26 @@ code {
 }
 
 .stats-list {
-  
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
   margin: 5px;
   padding: 3px;
   list-style: none;
+}
+
+.by2grid {
+
+  display: grid;
+  grid-template-columns:  auto auto 1fr;
+}
+
+.enemy-form-grid {
+  margin: 1rem;
+  border: 1px solid grey;
+  max-width: 40%;
+  display: grid;
+  grid-template-columns: 1fr auto ;
 }
 
 .button:hover {
@@ -31,4 +46,8 @@ code {
 }
 .selectedEnemy {
   color: green;
+}
+
+.vs-spacing {
+  margin: 20px;
 }

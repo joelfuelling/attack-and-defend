@@ -97,9 +97,9 @@ export default function App() {
     <div className="App">
       <div className="by2grid"> 
       <PlayerStats player1={player1}/>
-      {selectedEnemy && 
-      <SelectedEnemy selectedEnemy={selectedEnemy} error={error} setError={setError}/>
-      }
+        {selectedEnemy && 
+        <SelectedEnemy selectedEnemy={selectedEnemy} error={error} setError={setError}/>
+        }
       </div>
       {
       

@@ -54,9 +54,9 @@ const initialEnemies = [
   { id: 3,
     img: '',
     name: 'Smuggler',
-    hp: 10,
+    hp: 15,
     minimumAttack: 2,
-    maximumAttack: 6,
+    maximumAttack: 7,
     attack: function() {
       return randomNumber(
         this.minimumAttack, 
@@ -101,17 +101,19 @@ export default function App() {
 }
 
 function onAttack(selectedEnemy, player1Stats) {
-  if (selectedEnemy.hp > 0) {
-  selectedEnemy.hp = (selectedEnemy.hp - player1Stats.attack()) 
-  setSelectedEnemy({...selectedEnemy})
+  let enemy = {...selectedEnemy}
+  if (enemy.hp > 0) {
+    enemy.hp = (enemy.hp - player1Stats.attack()) 
+  setSelectedEnemy({...enemy})
   } 
 
 }
 
 function onDefend(selectedEnemy, player1Stats) {
-  if (player1Stats.hp > 0) {
-    player1Stats.hp = (player1Stats.hp - selectedEnemy.attack()) 
-  setPlayer1Stats({...player1Stats})
+  let player1= {...player1Stats}
+  if (player1.hp > 0) {
+    player1.hp = (player1.hp - selectedEnemy.attack()) 
+  setPlayer1Stats({...player1})
   } 
 
 }
@@ -125,7 +127,7 @@ function resetGame() {
 
   return (
     <div className="App">
-      <Button onClick={() => resetGame()}>Reset game</Button>
+      <Button onClick={resetGame}>Reset game</Button>
       <div className="by2grid"> 
       <PlayerStats player1={player1} player1Stats={player1Stats} selectedEnemy={selectedEnemy}/>
         {selectedEnemy && 

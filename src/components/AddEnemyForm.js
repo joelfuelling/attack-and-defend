@@ -2,10 +2,10 @@ import {useState}   from 'react'
 import Button from './Button'
 export default function AddEnemyForm({onAddEnemy, error, setError}) {
     const [name, setName] = useState('')
-    const [hp, setHp] = useState('0')
-    const [minimumAttack, setMinimumAttack] = useState('0')
-    const [maximumAttack, setMaximumAttack] = useState('0')
-    const [defense, setDefense] = useState('0')
+    const [hp, setHp] = useState('')
+    const [minimumAttack, setMinimumAttack] = useState('')
+    const [maximumAttack, setMaximumAttack] = useState('')
+    const [defense, setDefense] = useState('')
 
     
     function handleSubmit(e) {
@@ -40,16 +40,16 @@ export default function AddEnemyForm({onAddEnemy, error, setError}) {
         <>
         
         <form className="enemy-form-grid" onSubmit={handleSubmit}>
-            <p> Enemy name</p>
-            <input type="text" value={name} onChange={e => setName(e.target.value)}/>
-            <p> Enemy HP</p>
-            <input type="text" value={hp} onChange={e => setHp(e.target.value)}/>
-            <p> Enemy minimum Attack</p>
-            <input type="text" value={minimumAttack} onChange={e => setMinimumAttack(e.target.value)}/>
-            <p> Enemy maximum Attack</p>
-            <input type="text" value={maximumAttack} onChange={e => setMaximumAttack(e.target.value)}/>
-            <p> Enemy Defense</p>
-            <input type="text" value={defense} onChange={e => setDefense(e.target.value)}/>
+            <p> Name</p>
+            <input type="text" className="enemy-input-grid" value={name} placeholder=""onChange={e => setName(e.target.value)}/>
+            <p> HP</p>
+            <input type="text" className="enemy-input-grid" value={hp} onChange={e => setHp(e.target.value  > 0 ? e.target.value : '')}/>
+            <p> Minimum Attack</p>
+            <input type="text" className="enemy-input-grid" value={minimumAttack} onChange={e => setMinimumAttack(e.target.value  > 0 ? e.target.value : '')}/>
+            <p> Maximum Attack</p>
+            <input type="text" className="enemy-input-grid" value={maximumAttack} onChange={e => setMaximumAttack(e.target.value  > 0 ? e.target.value : '')}/>
+            <p> Defense</p>
+            <input type="text" className="enemy-input-grid" value={defense} onChange={e => setDefense(e.target.value  > 0 ? e.target.value : '')}/>
             <br />
             {
                 error && <p>All fields must be filled out</p>

@@ -11,13 +11,14 @@ import SelectedEnemy from './components/SelectedEnemy';
 
 const player1 = {
     id: 1,
+    img: '',
     name: 'Joel',
     hp: Number(20),
     minimumAttack: 3,
     maximumAttack: 5,
     // Below, we now call the function(), which can allow for a newly generated attack number each time.
-    attack: function() {
-      return randomNumber(player1.minimumAttack, player1.maximumAttack)
+    attack() {
+      return randomNumber(this.minimumAttack, this.maximumAttack)
     },
     defense: 3
   }
@@ -25,38 +26,41 @@ const player1 = {
 
 const initialEnemies = [
   { id: 1,
+    img: 'src/images/Goblin.png',
     name: 'Goblin',
     hp: 12,
     minimumAttack: 2,
     maximumAttack: 4,
     attack: function() {
       return randomNumber(
-        initialEnemies.minimumAttack, 
-        initialEnemies.maximumAttack)
+        this.minimumAttack, 
+        this.maximumAttack)
     },
     defense: 1
   },
   { id: 2,
+    img: '',
     name: 'Gloop!',
     hp: 8,
     minimumAttack: 3,
     maximumAttack: 4,
     attack: function() {
       return randomNumber(
-        initialEnemies.minimumAttack, 
-        initialEnemies.maximumAttack)
+        this.minimumAttack, 
+        this.maximumAttack)
     },
     defense: 3
   },
   { id: 3,
+    img: '',
     name: 'Smuggler',
     hp: 10,
     minimumAttack: 2,
     maximumAttack: 6,
     attack: function() {
       return randomNumber(
-        initialEnemies.minimumAttack, 
-        initialEnemies.maximumAttack)
+        this.minimumAttack, 
+        this.maximumAttack)
     },
     defense: 4
   }
@@ -74,6 +78,9 @@ export default function App() {
   const [enemies, setEnemies] = useState(initialEnemies)
   const [showAddEnemy, setShowAddEnemy] = useState(false)
   const [selectedEnemy, setSelectedEnemy] = useState(null)
+  const [player1Stats, setPlayer1Stats] = useState(player1)
+
+
 
   function handleAddEnemy(enemy) {
   setEnemies(enemies => [...enemies, enemy])
@@ -93,12 +100,36 @@ export default function App() {
     setShowAddEnemy(false)
 }
 
+function onAttack(selectedEnemy, player1Stats) {
+  if (selectedEnemy.hp > 0) {
+  selectedEnemy.hp = (selectedEnemy.hp - player1Stats.attack()) 
+  setSelectedEnemy({...selectedEnemy})
+  } 
+
+}
+
+function onDefend(selectedEnemy, player1Stats) {
+  if (player1Stats.hp > 0) {
+    player1Stats.hp = (player1Stats.hp - selectedEnemy.attack()) 
+  setPlayer1Stats({...player1Stats})
+  } 
+
+}
+
+function resetGame() {
+  setEnemies(initialEnemies)
+  setPlayer1Stats(player1)
+  setSelectedEnemy(null)
+}
+
+
   return (
     <div className="App">
+      <Button onClick={() => resetGame()}>Reset game</Button>
       <div className="by2grid"> 
-      <PlayerStats player1={player1}/>
+      <PlayerStats player1={player1} player1Stats={player1Stats} selectedEnemy={selectedEnemy}/>
         {selectedEnemy && 
-        <SelectedEnemy selectedEnemy={selectedEnemy} error={error} setError={setError}/>
+        <SelectedEnemy selectedEnemy={selectedEnemy} onAttack={onAttack} onDefend={onDefend} player1Stats={player1Stats}/>
         }
       </div>
       {

@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+.enemy-select-button {
+  margin: 10px;
+}
+
 .border {
   border: 1px solid rgb(96, 116, 25);
 }
@@ -27,17 +31,31 @@ code {
 }
 
 .by2grid {
-
   display: grid;
   grid-template-columns:  auto auto 1fr;
 }
 
+.by2grid-rows {
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
 .enemy-form-grid {
+  padding-left: 1rem;
   margin: 1rem;
   border: 1px solid grey;
-  max-width: 40%;
+  max-width: 35%;
   display: grid;
   grid-template-columns: 1fr auto ;
+}
+
+.enemy-input-grid {
+  padding-left: 1rem;
+  margin: 1rem;
+  border: 1px solid grey;
+
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .button:hover {
@@ -50,4 +68,5 @@ code {
 
 .vs-spacing {
   margin: 20px;
+  margin-top: -20px;
 }

@@ -70,3 +70,7 @@ code {
   margin: 20px;
   margin-top: -20px;
 }
+
+.dead {
+  background-color: rgb(144, 3, 3);
+}

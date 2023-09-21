@@ -9,6 +9,7 @@ import SelectedEnemy from './components/SelectedEnemy';
 
 
 
+
 const player1 = {
     id: 1,
     img: '',
@@ -26,7 +27,7 @@ const player1 = {
 
 const initialEnemies = [
   { id: 1,
-    img: 'src/images/Goblin.png',
+    img: '',
     name: 'Goblin',
     hp: 12,
     minimumAttack: 2,
@@ -102,7 +103,7 @@ export default function App() {
 
 function onAttack(selectedEnemy, player1Stats) {
   let enemy = {...selectedEnemy}
-  if (enemy.hp > 0) {
+  if (enemy.hp > 0 && player1Stats.hp > 0) {
     enemy.hp = (enemy.hp - player1Stats.attack()) 
   setSelectedEnemy({...enemy})
   } 
@@ -110,10 +111,10 @@ function onAttack(selectedEnemy, player1Stats) {
 }
 
 function onDefend(selectedEnemy, player1Stats) {
-  let player1= {...player1Stats}
-  if (player1.hp > 0) {
-    player1.hp = (player1.hp - selectedEnemy.attack()) 
-  setPlayer1Stats({...player1})
+  let player = {...player1Stats}
+  if (player.hp > 0 && selectedEnemy.hp > 0) {
+    player.hp = (player.hp - selectedEnemy.attack()) 
+  setPlayer1Stats({...player})
   } 
 
 }

@@ -17,6 +17,7 @@ export default function SelectedEnemy({selectedEnemy, onAttack, onDefend, player
             {
             selectedEnemy.hp > 0 ? 
             <>
+            <img src={selectedEnemy.image} alt="enemy"/>
             <h2>{selectedEnemy.name} </h2>
                 <ul>
                     <li>HP: {selectedEnemy.hp}</li>
